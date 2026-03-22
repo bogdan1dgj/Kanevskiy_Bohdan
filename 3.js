@@ -1,5 +1,10 @@
-let n = Number(prompt());
+let n = Number(prompt("Введіть число:"));
+let result = 1;  
+let i = 1;       
 
-for (let i = 1 ; i <= 10 ; i++) {
-   console.log(n + " * " + i + " = " + n * i);
+while (i <= n) {
+    result *= i; 
+    i++;         
 }
+
+console.log(n + "! = " + result);

@@ -1,16 +1,9 @@
-for (let num = 1; num <= 100; num++) {
+let age = Number(prompt("Введіть ваш вік"))
 
-    if (num % 3 == 0 && num % 5 == 0) {
-        console.log("FizzBuzz");
-    } 
-    else if (num % 3 == 0) {
-        console.log("Fizz");
-    } 
-    else if (num % 5 == 0) {
-        console.log("Buzz");
-    } 
-    else {
-        console.log(num);
-    }
-
+if (age < 18) {
+    alert("Вам заборонено вхід")
+} else if (age >= 18 && age <= 65) {
+    alert("Ласкаво просимо!")
+} else if (age > 65) {
+    alert("Будь ласка, будьте обережні!")
 }

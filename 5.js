@@ -1,24 +1,16 @@
-function findMinMax(arr) {
-  if (arr.length === 0) {
-    return { max: undefined, min: undefined };
-  }
+let secretNumber = Math.floor(Math.random() * 100) + 1;
 
-  let max = arr[0];
-  let min = arr[0];
+let userNumber;
 
- 
-  for (const num of arr) {
-    if (num > max) {
-      max = num;
+do {
+    userNumber = Number(prompt("Вгадай число від 1 до 100:"));
+
+    if (userNumber < secretNumber) {
+        alert("Загадане число більше");
+    } else if (userNumber > secretNumber) {
+        alert("Загадане число менше");
+    } else {
+        alert("Вітаємо! Ви вгадали число!");
     }
-    if (num < min) {
-      min = num;
-    }
-  }
 
-  return { max, min };
-}
-
-
-const numbers = [3, 1, 9, -2, 5, 10];
-console.log(findMinMax(numbers));
+} while (userNumber !== secretNumber);

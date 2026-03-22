@@ -1,17 +1,31 @@
-function factorial(n) {
-    if (n === 0) {
-        return 1;
-    }
-    
-    let result = 1;
+let a = Number(prompt("Введіть перше число:"));
+let b = Number(prompt("Введіть друге число:"));
 
-    for (let i = 1; i <= n; i++) {
-        result *= i;
-    }
-    
-    return result;
+
+let op = prompt("Введіть операцію (+, -, *, /):");
+
+let result;
+
+
+switch (op) {
+    case '+':
+        result = a + b;
+        break;
+    case '-':
+        result = a - b;
+        break;
+    case '*':
+        result = a * b;
+        break;
+    case '/':
+        if (b === 0) {
+            result = "Помилка: ділення на нуль!";
+        } else {
+            result = a / b;
+        }
+        break;
+    default:
+        result = "Невідома операція!";
 }
 
-
-let num = Number(prompt("Введіть число для обчислення факторіалу:"));
-console.log(num + "! =" + factorial(num));
+alert("Результат: " + result);
