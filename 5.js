@@ -1,16 +1,10 @@
-let secretNumber = Math.floor(Math.random() * 100) + 1;
+const names = ["Іван", "Марія", "Олег", "Анна"];
 
-let userNumber;
+const result = {};
 
-do {
-    userNumber = Number(prompt("Вгадай число від 1 до 100:"));
+for (let i = 0; i < names.length; i++) {
+  const name = names[i];
+  result[name] = name.length;
+}
 
-    if (userNumber < secretNumber) {
-        alert("Загадане число більше");
-    } else if (userNumber > secretNumber) {
-        alert("Загадане число менше");
-    } else {
-        alert("Вітаємо! Ви вгадали число!");
-    }
-
-} while (userNumber !== secretNumber);
+console.log(result);

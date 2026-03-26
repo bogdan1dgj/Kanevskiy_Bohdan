@@ -1,31 +1,27 @@
-let a = Number(prompt("Введіть перше число:"));
-let b = Number(prompt("Введіть друге число:"));
+const students = [
+    {
+        name: "Іван",
+        grades: { math: 10, english: 8, history: 9 }
+    },
+    {
+        name: "Марія",
+        grades: { math: 12, english: 11, history: 10 }
+    },
+    {
+        name: "Олег",
+        grades: { math: 7, english: 9, history: 8 }
+    }
+];
 
+students.forEach(student => {
+    const grades = Object.values(student.grades);
+    let sum = 0;
 
-let op = prompt("Введіть операцію (+, -, *, /):");
+    for (let i = 0; i < grades.length; i++) {
+        sum += grades[i];
+    }
 
-let result;
+    const average = sum / grades.length;
 
-
-switch (op) {
-    case '+':
-        result = a + b;
-        break;
-    case '-':
-        result = a - b;
-        break;
-    case '*':
-        result = a * b;
-        break;
-    case '/':
-        if (b === 0) {
-            result = "Помилка: ділення на нуль!";
-        } else {
-            result = a / b;
-        }
-        break;
-    default:
-        result = "Невідома операція!";
-}
-
-alert("Результат: " + result);
+    console.log(student.name + ": " + average.toFixed(2));
+});

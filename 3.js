@@ -1,10 +1,22 @@
-let n = Number(prompt("Введіть число:"));
-let result = 1;  
-let i = 1;       
+let products = [
+    { name: "Яблуко", category: "Фрукти" },
+    { name: "Банан", category: "Фрукти" },
+    { name: "Хліб", category: "Випічка" },
+    { name: "Молоко", category: "Напої" },
+    { name: "Сир", category: "Молочні продукти" },
+    { name: "Круасан", category: "Випічка" }
+];
 
-while (i <= n) {
-    result *= i; 
-    i++;         
+let grouped = {};
+
+for (let i = 0; i < products.length; i++) {
+    let cat = products[i].category;
+    if (!grouped[cat]) {
+        grouped[cat] = [];
+    }
+    grouped[cat].push(products[i].name);
 }
 
-console.log(n + "! = " + result);
+for (let category in grouped) {
+    console.log(category + ": " + grouped[category].join(", "));
+}

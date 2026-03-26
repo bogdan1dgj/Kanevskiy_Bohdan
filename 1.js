@@ -1,9 +1,16 @@
-let age = Number(prompt("Введіть ваш вік"))
+let arr = [5, 2, 9, 1, 7];
 
-if (age < 18) {
-    alert("Вам заборонено вхід")
-} else if (age >= 18 && age <= 65) {
-    alert("Ласкаво просимо!")
-} else if (age > 65) {
-    alert("Будь ласка, будьте обережні!")
-}
+let sum = arr.reduce((a, b) => a + b, 0);
+let average = sum / arr.length;
+
+
+let max = Math.max(...arr);
+let min = Math.min(...arr);
+
+arr.sort((a, b) => a - b);
+
+
+console.log("Масив:", arr);
+console.log("Середнє:", average);
+console.log("Максимум:", max);
+console.log("Мінімум:", min);
