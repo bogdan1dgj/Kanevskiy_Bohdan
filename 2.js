@@ -1,31 +1,37 @@
-const input = document.getElementById("textInput");
-const addButton = document.getElementById("btnAdd");
-const sortButton = document.getElementById("btnSort");
-const list = document.getElementById("itemsList");
+let input = document.getElementById("inputText");
+let addBtn = document.getElementById("addBtn");
+let sortBtn = document.getElementById("sortBtn");
+let list = document.getElementById("list");
 
-addButton.addEventListener("click", () => {
-    const value = input.value.trim();
+addBtn.onclick = function () {
+    let value = input.value;
 
     if (value === "") return;
 
-    const item = document.createElement("li");
-    item.textContent = value;
+    let li = document.createElement("li");
+    li.textContent = value;
 
-    item.addEventListener("click", () => {
-        item.remove();
+    li.onclick = function () {
+        this.remove();
+    };
+
+    list.appendChild(li);
+
+    input.value = "";
+};
+
+sortBtn.onclick = function () {
+    let items = list.getElementsByTagName("li");
+
+    let arr = Array.from(items);
+
+    arr.sort(function (a, b) {
+        return a.textContent.localeCompare(b.textContent);
     });
 
-    list.appendChild(item);
-    input.value = "";
-});
-
-sortButton.addEventListener("click", () => {
-    const elements = Array.from(list.children);
-
-    elements.sort((a, b) =>
-        a.textContent.localeCompare(b.textContent, 'uk')
-    );
-
     list.innerHTML = "";
-    elements.forEach(el => list.appendChild(el));
-});
+
+    arr.forEach(function (li) {
+        list.appendChild(li);
+    });
+};
