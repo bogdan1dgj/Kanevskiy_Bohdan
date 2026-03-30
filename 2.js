@@ -11,7 +11,6 @@ addButton.addEventListener("click", () => {
     const item = document.createElement("li");
     item.textContent = value;
 
-    // Видалення при кліку
     item.addEventListener("click", () => {
         item.remove();
     });
