@@ -1,60 +1,38 @@
-let a = Number(prompt("Введіть перше число:"));
-let b = Number(prompt("Введіть друге число:"));
-let c = Number(prompt("Введіть третє число:"));
-
-let max = a;
-
-if (b > max) {
-    max = b;
-}
-if (c > max) {
-    max = c;
+function fetchWithTimeout(url, timeout) {
+  return Promise.race([
+    fetch(url),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timeout")), timeout)
+    )
+  ]);
 }
 
-let min = a;
+async function fetchData() {
+  const urls = [
+    "https://jsonplaceholder.typicode.com/posts/1",
+    "https://jsonplaceholder.typicode.com/users/1"
+  ];
 
-if (b < min) {
-    min = b;
-}
-if (c < min) {
-    min = c;
-}
+  const requests = urls.map(url => fetchWithTimeout(url, 3000));
+  const results = await Promise.allSettled(requests);
 
-alert("Найбільше: " + max);
-alert("Найменше: " + min);
+  const hasTimeout = results.some(
+    result =>
+      result.status === "rejected" &&
+      result.reason.message === "Request timeout"
+  );
 
-console.log("Найбільше: " + max);
-console.log("Найменше: " + min);
+  if (hasTimeout) {
+    return "Request timeout";
+  }
 
+  const data = await Promise.all(
+    results.map(res => res.value.json())
+  );
 
-
-
-
-let parne = (a % 2 === 0) || (b % 2 === 0) || (c % 2 === 0);
-
-alert("Чи є хоча б одне парне число: " + parne);
-console.log("Чи є хоча б одне парне число:", parne);
-
-
-let condition = (a > b) && (b < c);
-
-alert("Перевірка умови (a > b && b < c): " + condition);
-console.log("Перевірка умови:" + condition);
-
-
-let number = Number(prompt("Введіть число для перевірки чи воно просте:"));
-let isPrime = true;
-
-if (number <= 1) {
-  ime = false;
-} else {
-    for (let i = 2; i < number; i++) {
-        if (number % i === 0) {
-            ime = false;
-            break;
-        }
-    }
+  return data;
 }
 
-alert("Число просте: " + ime);
-console.log("Число просте:"+ ime);
+fetchData()
+  .then(data => console.log(data))
+  .catch(err => console.error(err));

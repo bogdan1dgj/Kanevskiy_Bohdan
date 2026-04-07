@@ -1,31 +1,27 @@
-let a = prompt("Ім'я:");
-let b = Number(prompt("Рік народження:"));
-let c = prompt("Ваше місто:");
-
-let year = 2026; 
-let age = year - b;
-
-console.log("Ім'я:", a);
-console.log("Місто:", c);
-console.log("Ваш вік:", age);
-
-if (age <= 12) {
-    console.log("Ви дитина");
-} 
-else if (age <= 17) {
-    console.log("Ви підліток");
-} 
-else if (age <= 59) {
-    console.log("Ви дорослий");
-} 
-else {
-    console.log("Ви літня людина");
+function fetchData(id) {
+  return new Promise((resolve) => {
+    const delay = Math.floor(Math.random() * 2000) + 1000;
+    setTimeout(() => {
+      resolve(`Data for ID: ${id} (delay: ${delay}ms)`);
+    }, delay);
+  });
 }
 
-let capital = "Київ";
+async function processData() {
+  const parallelIds = [1, 2, 3];
+  const parallelResults = await Promise.all(
+    parallelIds.map(id => fetchData(id))
+  );
 
-if (c === capital) {
-    console.log("Ви живете у столиці України.");
-} else {
-    console.log("Ваше місто не є столицею України.");
+  console.log("Parallel results:");
+  parallelResults.forEach(res => console.log(res));
+
+  const sequentialIds = [4, 5, 6];
+
+  console.log("Sequential results:");
+  for await (const result of sequentialIds.map(id => fetchData(id))) {
+    console.log(result);
+  }
 }
+
+processData().catch(console.error);
