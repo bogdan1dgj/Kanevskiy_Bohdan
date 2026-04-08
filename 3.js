@@ -1,38 +1,20 @@
-function fetchWithTimeout(url, timeout) {
-  return Promise.race([
-    fetch(url),
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Request timeout")), timeout)
-    )
-  ]);
-}
+const form = document.getElementById("form");
+const loginBtn = document.getElementById("login");
+const clearBtn = document.getElementById("clear");
+const profile = document.getElementById("profile");
 
-async function fetchData() {
-  const urls = [
-    "https://jsonplaceholder.typicode.com/posts/1",
-    "https://jsonplaceholder.typicode.com/users/1"
-  ];
+const editName = document.getElementById("editName");
+const editPhone = document.getElementById("editPhone");
 
-  const requests = urls.map(url => fetchWithTimeout(url, 3000));
-  const results = await Promise.allSettled(requests);
+const KEY = "user";
 
-  const hasTimeout = results.some(
-    result =>
-      result.status === "rejected" &&
-      result.reason.message === "Request timeout"
-  );
+document.addEventListener("DOMContentLoaded", () => {
+  const data = JSON.parse(localStorage.getItem(KEY));
+  if (!data) return;
 
-  if (hasTimeout) {
-    return "Request timeout";
-  }
+  name.value = data.name;
+  email.value = data.email;
+  phone.value = data.phone;
+  password.value = data.password;
+});
 
-  const data = await Promise.all(
-    results.map(res => res.value.json())
-  );
-
-  return data;
-}
-
-fetchData()
-  .then(data => console.log(data))
-  .catch(err => console.error(err));

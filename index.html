@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Форма користувача</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <script src="4.js">
 
-    </script>
-    <script src="3.js">
+<div class="container">
+    <h2>Користувач</h2>
 
-    </script>
+    <form id="form">
+        <input type="text" id="name" placeholder="Ім'я" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="phone" placeholder="Телефон" required>
+        <input type="password" id="password" placeholder="Пароль" required>
+
+        <button type="submit">Зберегти</button>
+    </form>
+
+    <div class="buttons">
+        <button id="login">Увійти</button>
+        <button id="clear">Очистити</button>
+    </div>
+
+    <div id="profile" class="hidden">
+        <h3>Редагування</h3>
+        <input type="text" id="editName">
+        <input type="tel" id="editPhone">
+        <button id="update">Оновити</button>
+    </div>
+</div>
+
+<script src="3.js"></script>
 </body>
 </html>
